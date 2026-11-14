@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://djtdwl305sjg1"]
+
+[ext_resource type="PackedScene" uid="uid://blyx8svm7i1wj" path="res://node_3d.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://5bmpn43ssdl8" path="res://cheese_spawner.gd" id="1_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://gn632tnpmk7" path="res://cheese.tscn" id="2_fj7yv"]
+[ext_resource type="Script" uid="uid://chml07hk13v0r" path="res://score_label.gd" id="4_aqk2v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_emppn"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbmk3"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wbmk3"]
+font_size = 32
+
+[node name="Node3D" type="Node3D" unique_id=2058071212]
+script = ExtResource("1_tlwt5")
+cheese_scene = ExtResource("2_fj7yv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2114837485]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=2098680400]
+mesh = SubResource("BoxMesh_emppn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1606307527]
+shape = SubResource("BoxShape3D_wbmk3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1831368217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, 0)
+
+[node name="CharacterBody3D" parent="." unique_id=1919373782 instance=ExtResource("1_f3sb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2584492, 0)
+
+[node name="Cheese" parent="." unique_id=1112498456 instance=ExtResource("2_fj7yv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1196713, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=757503734]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=139496593]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 145.0
+offset_bottom = 65.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_wbmk3")
+script = ExtResource("4_aqk2v")
