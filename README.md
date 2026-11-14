@@ -1,8 +1,8 @@
 https://methane-gas.itch.io/epik-blob-game-7
 # Epik Blob Game 7
-## by Violet and Vishwesh
+## by Violet, Vishwesh, and Eliana
 
-# Description
+## Description
 A 3d Godot game where a slime ball whimsically collects cheese blocks.
 Realtime soft-body physics.
 
