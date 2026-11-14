@@ -2,8 +2,8 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const SPEED = 6
+const JUMP_VELOCITY = 6
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -24,5 +24,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+	var cam_input := Input.get_vector("camera_right", "camera_left", "camera_up", "camera_down")
+	if cam_input:
+		rotate_y(cam_input.x * delta)
+		rotate_x(cam_input.y * delta)
 
 	move_and_slide()
