@@ -8,3 +8,6 @@ Realtime soft-body physics.
 
 ## Controls
 Move with WASD, jump with spacebar, dash with shift, and grapple with right-click.
+
+## AI Declaration
+We used AI to learn Godot concepts
