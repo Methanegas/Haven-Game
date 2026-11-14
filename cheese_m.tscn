@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dwpcsvi60kkx0"]
+
+[ext_resource type="PackedScene" uid="uid://cc23nh4cr5e4x" path="res://cheese.fbx" id="1_ikj2q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0ldm"]
+albedo_color = Color(1, 1, 0, 1)
+
+[node name="cheese" unique_id=1693310841 instance=ExtResource("1_ikj2q")]
+
+[node name="Cube" parent="." index="0" unique_id=351610184]
+surface_material_override/0 = SubResource("StandardMaterial3D_s0ldm")

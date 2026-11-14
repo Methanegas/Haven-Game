@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://br7cy53egyg4w"]
+
+[ext_resource type="Script" uid="uid://djamw5jkpwagi" path="res://blob.gd" id="1"]
+[ext_resource type="Script" uid="uid://c34pvm3p8cwk5" path="res://follow_camera.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://cnnrxn0lw1k4c" path="res://blob brick texture wowowowowow(1).png" id="3_i5m1y"]
+[ext_resource type="Shader" uid="uid://dyw3ktfed62ap" path="res://blob.gdshader" id="3_jle3w"]
+[ext_resource type="Script" uid="uid://6j6bt8ujj723" path="res://blob_body.gd" id="4_aaw6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u52ul"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yi2vk"]
+render_priority = 0
+shader = ExtResource("3_jle3w")
+shader_parameter/Specular = 0.5
+shader_parameter/Hardness = 50.0
+shader_parameter/BaseColor = Color(0.05, 0.3, 1, 1)
+shader_parameter/HighlightColor = Color(0.6, 0.9, 1, 1)
+shader_parameter/Opacity = 0.2
+shader_parameter/refraction = 60000.0
+shader_parameter/slime_center = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaw6g"]
+albedo_texture = ExtResource("3_i5m1y")
+
+[sub_resource type="SphereMesh" id="SphereMesh_8ysh6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8tsx8"]
+render_priority = 0
+shader = ExtResource("3_jle3w")
+shader_parameter/Specular = 0.5
+shader_parameter/Hardness = 50.0
+shader_parameter/BaseColor = Color(0.05, 0.3, 1, 1)
+shader_parameter/HighlightColor = Color(0.6, 0.9, 1, 1)
+shader_parameter/Opacity = 0.2
+shader_parameter/refraction = 60000.0
+shader_parameter/slime_center = Vector3(0, 0, 0)
+
+[node name="Thing" type="CharacterBody3D" unique_id=1710521899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00035643578, 0.019147754)
+script = ExtResource("1")
+
+[node name="Target" type="Node3D" parent="." unique_id=883826096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.417, -1.0167528)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Target" unique_id=867921444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5742263, 0.38700178)
+shape = SubResource("CapsuleShape3D_u52ul")
+spring_length = 10.0
+margin = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Target/SpringArm3D" unique_id=1184818641]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.532211, 0.9153019, -0.2143178)
+fov = 74.0
+near = 0.1
+far = 50.0
+script = ExtResource("3")
+
+[node name="Body" type="SoftBody3D" parent="." unique_id=1549934786]
+material_override = SubResource("ShaderMaterial_yi2vk")
+material_overlay = SubResource("StandardMaterial3D_aaw6g")
+mesh = SubResource("SphereMesh_8ysh6")
+surface_material_override/0 = SubResource("ShaderMaterial_8tsx8")
+parent_collision_ignore = NodePath("..")
+simulation_precision = 40
+total_mass = 5.0
+linear_stiffness = 0.6
+shrinking_factor = -0.1
+pressure_coefficient = 50.0
+script = ExtResource("4_aaw6g")
+stiffness = 1.0
+pressure = 45.0
+precision = 50

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dwjo6dyqego31"]
+
+[ext_resource type="Script" uid="uid://dd8rn5w4qcqhb" path="res://node_3d.gd" id="1_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://br7cy53egyg4w" path="res://blob.tscn" id="1_a202f"]
+[ext_resource type="Texture2D" uid="uid://c53gr5r40vbso" path="res://qwantani_dusk_2_puresky_4k.exr" id="2_noarx"]
+[ext_resource type="PackedScene" uid="uid://gn632tnpmk7" path="res://cheese.tscn" id="6_i5arm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ysh6"]
+size = Vector3(90.708984, 0.5034297, 85.16626)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a202f"]
+size = Vector3(0.9706421, 0.09509277, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_noarx"]
+panorama = ExtResource("2_noarx")
+energy_multiplier = 0.3
+
+[sub_resource type="Sky" id="Sky_a0tk4"]
+sky_material = SubResource("PanoramaSkyMaterial_noarx")
+
+[sub_resource type="Environment" id="Environment_a202f"]
+background_mode = 2
+sky = SubResource("Sky_a0tk4")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_noarx"]
+
+[sub_resource type="Compositor" id="Compositor_a0tk4"]
+
+[node name="Node3D" type="Node3D" unique_id=1931575596]
+script = ExtResource("1_a0tk4")
+cheese_scene = ExtResource("6_i5arm")
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1920421777]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=454686621]
+transform = Transform3D(1.005644, 0, 0, 0, 1.005644, 0, 0, 0, 1.005644, 0.015722275, -0.027429104, -0.23980093)
+mesh = SubResource("BoxMesh_8ysh6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=475912451]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.13673878, -4.24539, 0)
+shape = SubResource("BoxShape3D_a202f")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1859435005]
+environment = SubResource("Environment_a202f")
+camera_attributes = SubResource("CameraAttributesPractical_noarx")
+compositor = SubResource("Compositor_a0tk4")
+
+[node name="thing" parent="." unique_id=1710521899 instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9901006, 0.019147754)
+
+[node name="Body" parent="thing" index="1" unique_id=1549934786]
+simulation_precision = 5
+pressure_coefficient = 150.0
+disable_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=786293196]
+
+[node name="ScoreLable" type="Label" parent="CanvasLayer" unique_id=2110123591]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Cheese" parent="." unique_id=1112498456 instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.238773, 0.75924873, -6.035501)
+
+[editable path="thing"]
